@@ -1,0 +1,498 @@
+[
+    {
+        "id": "a2d9efc3.f6fa5",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "f52eb4c8.e19358",
+        "type": "inject",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "repeat": "3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 90,
+        "y": 380,
+        "wires": [
+            [
+                "4d4a15be.c8157c",
+                "9d87737e.75cb5",
+                "1a2e21b9.5d04be",
+                "d88f61f6.3a262",
+                "3e3f04ae.b0ed8c"
+            ]
+        ]
+    },
+    {
+        "id": "a7d64c19.c3907",
+        "type": "debug",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1290,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "4d4a15be.c8157c",
+        "type": "random",
+        "z": "a2d9efc3.f6fa5",
+        "name": "Current",
+        "low": "55",
+        "high": "58",
+        "inte": "true",
+        "property": "payload",
+        "x": 360,
+        "y": 260,
+        "wires": [
+            [
+                "32aeed91.44cba2"
+            ]
+        ]
+    },
+    {
+        "id": "9d87737e.75cb5",
+        "type": "random",
+        "z": "a2d9efc3.f6fa5",
+        "name": "PressureIn",
+        "low": "1000",
+        "high": "1009",
+        "inte": "false",
+        "property": "payload",
+        "x": 370,
+        "y": 320,
+        "wires": [
+            [
+                "4ab689b5.8f2788"
+            ]
+        ]
+    },
+    {
+        "id": "1a2e21b9.5d04be",
+        "type": "random",
+        "z": "a2d9efc3.f6fa5",
+        "name": "PressureOut",
+        "low": "1000",
+        "high": "1009",
+        "inte": "false",
+        "property": "payload",
+        "x": 370,
+        "y": 400,
+        "wires": [
+            [
+                "b99ae4f5.69e818"
+            ]
+        ]
+    },
+    {
+        "id": "d88f61f6.3a262",
+        "type": "random",
+        "z": "a2d9efc3.f6fa5",
+        "name": "FluidFlow",
+        "low": "200",
+        "high": "215",
+        "inte": "false",
+        "property": "payload",
+        "x": 360,
+        "y": 460,
+        "wires": [
+            [
+                "84c86b15.d8a5d8"
+            ]
+        ]
+    },
+    {
+        "id": "3e3f04ae.b0ed8c",
+        "type": "random",
+        "z": "a2d9efc3.f6fa5",
+        "name": "StuffingBox",
+        "low": "23",
+        "high": "25",
+        "inte": "false",
+        "property": "payload",
+        "x": 370,
+        "y": 520,
+        "wires": [
+            [
+                "941f9c96.40953"
+            ]
+        ]
+    },
+    {
+        "id": "46c4720.c8ad89",
+        "type": "ui_switch",
+        "z": "a2d9efc3.f6fa5",
+        "name": "Valve Controller",
+        "label": "Valve Control",
+        "tooltip": "Turns the valve on or off",
+        "group": "60759073.49584",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 150,
+        "y": 700,
+        "wires": [
+            [
+                "1d349012.71bd6"
+            ]
+        ],
+        "info": "# Turns valve "
+    },
+    {
+        "id": "3679cde9.b3fb82",
+        "type": "debug",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 710,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "241a03.776055fe",
+        "type": "join",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "5",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 750,
+        "y": 340,
+        "wires": [
+            [
+                "25303776.64de08"
+            ]
+        ]
+    },
+    {
+        "id": "32aeed91.44cba2",
+        "type": "function",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "func": "msg.topic = 'Motor_Current';\nmsg.payload = String(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 260,
+        "wires": [
+            [
+                "241a03.776055fe"
+            ]
+        ]
+    },
+    {
+        "id": "4ab689b5.8f2788",
+        "type": "function",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "func": "msg.topic = 'Pressure_In';\nmsg.payload = String(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [
+                "241a03.776055fe"
+            ]
+        ]
+    },
+    {
+        "id": "b99ae4f5.69e818",
+        "type": "function",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "func": "msg.topic = 'Pressure_Out';\nmsg.payload = String(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 400,
+        "wires": [
+            [
+                "241a03.776055fe"
+            ]
+        ]
+    },
+    {
+        "id": "84c86b15.d8a5d8",
+        "type": "function",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "func": "msg.topic = 'Fluid_Flow';\n\nvar valve_status = global.get('valve_status');\nif (valve_status === 0){\n    msg.payload = 0;\n}\nmsg.payload = String(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 460,
+        "wires": [
+            [
+                "241a03.776055fe",
+                "e4dad65.fa54f28"
+            ]
+        ]
+    },
+    {
+        "id": "941f9c96.40953",
+        "type": "function",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "func": "msg.topic = 'Stuffing_Box';\n\nvar valve_status = global.get('valve_status');\nif (valve_status === 0){\n    var now = Date.now();\n    const updated_time = global.get('status_time');\n    var scale = now - updated_time;\n    msg.payload = 25 + (scale/100001);\n}\nmsg.payload = String(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 520,
+        "wires": [
+            [
+                "241a03.776055fe",
+                "740ba0c.d78126"
+            ]
+        ]
+    },
+    {
+        "id": "1d349012.71bd6",
+        "type": "switch",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 340,
+        "y": 720,
+        "wires": [
+            [
+                "df09df27.42446"
+            ],
+            [
+                "e83babed.141508"
+            ]
+        ]
+    },
+    {
+        "id": "e83babed.141508",
+        "type": "function",
+        "z": "a2d9efc3.f6fa5",
+        "name": "Valve Open",
+        "func": "msg.payload = 'Keep Valve Opened';\nglobal.set('valve_status',1);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 520,
+        "y": 780,
+        "wires": [
+            [
+                "7e93e545.3d902c"
+            ]
+        ]
+    },
+    {
+        "id": "7e93e545.3d902c",
+        "type": "debug",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 730,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "df09df27.42446",
+        "type": "function",
+        "z": "a2d9efc3.f6fa5",
+        "name": "Valve Closed",
+        "func": "msg.payload = 'Keep Valve Closed';\nglobal.set('valve_status',0);\n\nglobal.set('status_time', Date.now());\nmsg.time = global.get('status_time)');\nmsg.now = Date.now();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 510,
+        "y": 680,
+        "wires": [
+            [
+                "3679cde9.b3fb82"
+            ]
+        ]
+    },
+    {
+        "id": "edf0a616.34f348",
+        "type": "inject",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 600,
+        "wires": [
+            [
+                "46c4720.c8ad89"
+            ]
+        ]
+    },
+    {
+        "id": "740ba0c.d78126",
+        "type": "ui_gauge",
+        "z": "a2d9efc3.f6fa5",
+        "name": "Stuffing Box Temperature",
+        "group": "60759073.49584",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "StuffingBox Temperature",
+        "label": " Celsius",
+        "format": "{{value|number:2}}",
+        "min": "23",
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "29",
+        "seg2": "36",
+        "x": 770,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "e4dad65.fa54f28",
+        "type": "ui_gauge",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "group": "60759073.49584",
+        "order": 4,
+        "width": "9",
+        "height": "10",
+        "gtype": "wave",
+        "title": "Fluid Flow",
+        "label": " m3/s",
+        "format": "{{value|number:2}}",
+        "min": "0",
+        "max": "220",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "29",
+        "seg2": "36",
+        "x": 770,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "5a1cda17.203514",
+        "type": "mindconnect",
+        "z": "a2d9efc3.f6fa5",
+        "name": "academy1",
+        "configtype": "SHARED_SECRET",
+        "agentconfig": "{\n  \"content\": {\n    \"baseUrl\": \"https://southgate.eu1.mindsphere.io\",\n    \"iat\": \"eyJraWQiOiJrZXktaWQtMSIsInR5cCI6IkpXVCIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJTQ0kiLCJzdWIiOiJmYmVhMjQ3NmZjZTM0MDYwYjE4YmE5YjM1ZTVlNWI0YiIsImF1ZCI6IkFJQU0iLCJpYXQiOjE1OTYzODk2MjcsIm5iZiI6MTU5NjM4OTYyNywiZXhwIjoxNTk2OTk0NDI3LCJqdGkiOiJiZTI1ODFmMS0yYWQ2LTRkY2MtOWViOS1lM2Y3MTI2ZmVkMTEiLCJzY29wZSI6IklBVCIsInRlbiI6ImFjYWRlbXkyIiwidGVuX2N0eCI6Im1haW4tdGVuYW50IiwiY2xpZW50X2NyZWRlbnRpYWxzX3Byb2ZpbGUiOlsiU0hBUkVEX1NFQ1JFVCJdLCJzY2hlbWFzIjpbInVybjpzaWVtZW5zOm1pbmRzcGhlcmU6djEiXX0.qHjQ-I7t2VXpjcluKAZixS6B58AkXcC_sxghLcJ9QQ0XSfpRePlu_kyJKGA1NJ8Uou78qDnEoYBAoYjvVr69gTAbn9y4sTCMVHp7sQsORPXI5jFj9yCQxubK9fRGQDqLpMGqSlunI1Ka2tbmLtHFlRy3AXdnS56ts0ZL08YcsUMMT6pZ6KPhn7fAeiIoCmiK39_jISbA5NwpiJSqO2zXh6vcJzHMme7dUvpynmYHBMc4B0FqLh9gAPDDoJJFSEMW9MuzXNp5a3BAOZ2VrWpIhefpeTipXQfkc9IDOHx0rCy7pvyoLKNmmcZ45nd8_Dj0KPZ2VtXgT4nduWlJ28Uifw\",\n    \"clientCredentialProfile\": [\n      \"SHARED_SECRET\"\n    ],\n    \"clientId\": \"fbea2476fce34060b18ba9b35e5e5b4b\",\n    \"tenant\": \"academy1\"\n  },\n  \"expiration\": \"2020-08-09T17:33:47.000Z\"\n}",
+        "privatekey": "",
+        "model": "",
+        "validate": true,
+        "validateevent": true,
+        "chunk": false,
+        "disablekeepalive": false,
+        "retry": 3,
+        "parallel": 1,
+        "x": 1070,
+        "y": 340,
+        "wires": [
+            [
+                "a7d64c19.c3907"
+            ]
+        ]
+    },
+    {
+        "id": "25303776.64de08",
+        "type": "function",
+        "z": "a2d9efc3.f6fa5",
+        "name": "",
+        "func": "const values = [\n { dataPointId: \"1596389460789\", qualityCode: \"0\", value: \"\"+ msg.payload.Stuffing_Box  },\n { dataPointId: \"1596389460792\", qualityCode: \"0\", value: \"\"+ msg.payload.Fluid_Flow },\n { dataPointId: \"1596389460791\", qualityCode: \"0\", value: \"\"+ msg.payload.Pressure_Out },\n { dataPointId: \"1596389460790\", qualityCode: \"0\", value: \"\"+ msg.payload.Pressure_In },\n { dataPointId: \"1596389460793\", qualityCode: \"0\", value: \"\"+ msg.payload.Motor_Current }\n];\n\nmsg._time = new Date();\nmsg.payload = values;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 890,
+        "y": 340,
+        "wires": [
+            [
+                "5a1cda17.203514"
+            ]
+        ]
+    },
+    {
+        "id": "60759073.49584",
+        "type": "ui_group",
+        "z": "",
+        "name": "Pump Status",
+        "tab": "ad6c45e6.9907d8",
+        "order": 2,
+        "disp": true,
+        "width": "10",
+        "collapse": false
+    },
+    {
+        "id": "ad6c45e6.9907d8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Pump Setup",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
